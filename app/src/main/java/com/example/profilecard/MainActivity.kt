@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -50,16 +51,32 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun ProfileCard(name: String, modifier: Modifier = Modifier) {
-    Column(
-        modifier = Modifier.fillMaxSize()
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(10.dp)
+    Box(
+        //Main container to allow for background color
+        modifier = Modifier.background(color = Color(0xFF07393C))
     )
     {
-        ProfileImage()
-        ProfileName()
-        Biography()
+        Column(
+            //Display all elements stacked vertically
+            modifier = Modifier.fillMaxSize()
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(10.dp)
+        )
+        {
+            ProfileImage()
+            ProfileName()
+            Column(
+                //Container for biography lines
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.background(color = Color(0xFF2C666E))
+                    .padding(8.dp)
+            )
+            {
+                BiographyLine(line = "I made this app with Android Studio.")
+                BiographyLine(line = "This is my first app with Kotlin.")
+            }
+        }
     }
 }
 
@@ -67,6 +84,7 @@ fun ProfileCard(name: String, modifier: Modifier = Modifier) {
 fun ProfileImage(modifier : Modifier = Modifier) {
 val profilePic = painterResource(R.drawable.wizard)
 Image(
+    //Circular profile picture
     painter = profilePic,
     contentDescription = "Profile Picture",
     modifier.size(200.dp)
@@ -77,13 +95,21 @@ Image(
 @Composable
 fun ProfileName(modifier : Modifier = Modifier) {
     Text(
-        text = "Name"
+        //Large text element for name
+        text = "Chris Moore",
+        modifier = Modifier.background(color = Color(0xFF2C666E), shape = CircleShape)
+            .padding(8.dp),
+        fontSize = 36.sp
     )
 }
 
 @Composable
-fun Biography(modifier : Modifier = Modifier) {
-
+fun BiographyLine(modifier : Modifier = Modifier, line : String) {
+    Text(
+        //Smaller text element for biography
+        text = line,
+        fontSize = 20.sp
+    )
 }
 
 @Preview(showBackground = true)
