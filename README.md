@@ -1,4 +1,4 @@
-#Lab 1 - Profile Card
+# Lab 1 - Profile Card
 
 This is the first lab for CITC 2376, the profile card application.
 It displays a profile image, name, and short bio.
