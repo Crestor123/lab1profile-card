@@ -27,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.profilecard.ui.theme.ProfileCardTheme
 
@@ -37,12 +38,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             ProfileCardTheme {
                 Surface(
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier
+                        .fillMaxSize()
                         .background(color = Color.Cyan)
                 ) {
-                    ProfileCard(
-                        name = "Test"
-                    )
+                    ProfileCard()
                 }
             }
         }
@@ -50,7 +50,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun ProfileCard(name: String, modifier: Modifier = Modifier) {
+fun ProfileCard(modifier: Modifier = Modifier) {
     Box(
         //Main container to allow for background color
         modifier = Modifier.background(color = Color(0xFF07393C))
@@ -58,7 +58,8 @@ fun ProfileCard(name: String, modifier: Modifier = Modifier) {
     {
         Column(
             //Display all elements stacked vertically
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(10.dp)
@@ -69,12 +70,13 @@ fun ProfileCard(name: String, modifier: Modifier = Modifier) {
             Column(
                 //Container for biography lines
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.background(color = Color(0xFF2C666E))
+                modifier = Modifier
+                    .background(color = Color(0xFF2C666E))
                     .padding(8.dp)
             )
             {
-                BiographyLine(line = "I made this app with Android Studio.")
-                BiographyLine(line = "This is my first app with Kotlin.")
+                BiographyLine(line = stringResource(R.string.bio_line_1))
+                BiographyLine(line = stringResource(R.string.bio_line_2))
             }
         }
     }
@@ -87,7 +89,8 @@ Image(
     //Circular profile picture
     painter = profilePic,
     contentDescription = "Profile Picture",
-    modifier.size(200.dp)
+    modifier
+        .size(200.dp)
         .clip(CircleShape)
 )
 }
@@ -96,8 +99,9 @@ Image(
 fun ProfileName(modifier : Modifier = Modifier) {
     Text(
         //Large text element for name
-        text = "Chris Moore",
-        modifier = Modifier.background(color = Color(0xFF2C666E), shape = CircleShape)
+        text = stringResource(R.string.Name),
+        modifier = Modifier
+            .background(color = Color(0xFF2C666E), shape = CircleShape)
             .padding(8.dp),
         fontSize = 36.sp
     )
@@ -116,6 +120,6 @@ fun BiographyLine(modifier : Modifier = Modifier, line : String) {
 @Composable
 fun ProfileCardPreview() {
     ProfileCardTheme {
-        ProfileCard("Android")
+        ProfileCard()
     }
 }
